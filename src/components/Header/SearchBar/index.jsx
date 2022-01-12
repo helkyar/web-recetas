@@ -1,18 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 
 import './component.css'
 import search from './img/search.png'
+import {useState} from 'react';
 
 function SearchBar() {
-    // enter-click listener search
-    // search info is passed throw GET (/string for searches, /number for the rest)
-    // link
+    const navigate = useNavigate();
+    // link & navigate
+    const [input, setInput] = useState('');
+
     return (
+        
         <div className="search-bar-container">
-            <input type="text" placeholder="ingrediente, área..."/>
-            <Link to="/recipes/search/pedo" />
-                {/* <img src={search} alt="search button" /> */}
+           
+            <form onSubmit={()=>navigate(`/recipes/search/${input}`)}>
+            {/* <form> */}
+                <input 
+                type="text" 
+                value={input} 
+                onChange={(e)=>setInput(e.target.value)} 
+                placeholder="ingrediente, área..."/>
+            </form>
+            <Link to={`/recipes/search/${input}`}>  <img src={search} alt="search button" /></Link>  
+                       
         </div>  );
 }
  
-export default SearchBar;
+export default SearchBar;   
