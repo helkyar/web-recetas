@@ -13,7 +13,7 @@ function SearchBar() {
         
         <div className="search-bar-container">
            
-            <form onSubmit={()=>navigate(`/recipes/search/${input}`)}>
+            <form onSubmit={()=>input ? navigate(`/recipes/search/${input}`) : navigate("/")}> 
             {/* <form> */}
                 <input 
                 type="text" 
@@ -21,7 +21,7 @@ function SearchBar() {
                 onChange={(e)=>setInput(e.target.value)} 
                 placeholder="ingrediente, área..."/>
             </form>
-            <Link to={`/recipes/search/${input}`}>  <img src={search} alt="search button" /></Link>  
+            <Link to={input && `/recipes/search/${input}`}>  <img src={search} alt="search button" /></Link>  
                        
         </div>  );
 }
