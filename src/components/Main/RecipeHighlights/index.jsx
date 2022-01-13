@@ -10,7 +10,7 @@ export function RecipeHighlights(){
     useEffect(() => {
         
         async function fetchData(){
-            const resp = await axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
+            const resp = await axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
             meal = resp.data.meals
             setMeals(meal)
         }
@@ -24,11 +24,7 @@ export function RecipeHighlights(){
     let hightlights = meals.map((element)=> 
         <div>
             <h3>{element.strMeal}</h3>
-            <span>Categoría: </span><p>{element.strCategory}</p>
-            <div>
-                <video src={element.strYoutube} height="100px">
-                </video>
-            </div>
+            <img src={element.strMealThumb}></img>
          </div>
     )
     
