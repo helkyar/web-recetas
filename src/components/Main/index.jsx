@@ -1,6 +1,7 @@
 import './component.css';
 import React from 'react';
 import Globe from 'react-globe.gl';
+import { RecipeHighlights } from './RecipeHighlights';
 import {scaleSequentialSqrt} from 'd3-scale';
 import {interpolateYlOrRd} from 'd3-scale-chromatic';
 
@@ -50,10 +51,12 @@ function Main() {
     onPolygonHover={setHoverD}
     polygonsTransitionDuration={300}
   />
+  <RecipeHighlights />
     </div>
   
   );
 }
+
 
 
 
