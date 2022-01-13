@@ -11,6 +11,13 @@ function Header() {
   const navigate = useNavigate();
   return (
     <header className='header'>
+      <script src="//unpkg.com/react/umd/react.production.min.js"></script>
+  <script src="//unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+  <script src="//unpkg.com/babel-standalone"></script>
+
+  <script src="//unpkg.com/d3"></script>
+
+  <script src="//unpkg.com/react-globe.gl"></script>
       <SearchBar/>
       <button onClick={()=>navigate("recipes/new/"+new Date().getTime())}>New</button>
       <button onClick={()=>navigate("recipes/popu/"+new Date().getMonth())}>Popu</button>
