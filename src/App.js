@@ -12,14 +12,16 @@ import Results from './components/Results';
 import DetailView from './components/DetailView';
 import Footer from './components/Footer';
 
+
 function App() {
   return (
     <div className="App">
       <Header/>
+      
       <Router>
         <Switch>
           <Route path="/" element={<Main />}/>
-          <Route path="/recipes/:search" element={<Results />}/>
+          <Route path="/recipes/:type/:search" element={<Results />}/>
           <Route path="/recipe/:id" element={<DetailView/>}/>
         </Switch>
       </Router>      
