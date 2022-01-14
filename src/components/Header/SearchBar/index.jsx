@@ -6,7 +6,6 @@ import {useState} from 'react';
 
 function SearchBar() {
     const navigate = useNavigate();
-    // link & navigate
     const [input, setInput] = useState('');
 
     return (
