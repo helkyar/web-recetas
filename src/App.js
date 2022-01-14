@@ -12,6 +12,7 @@ import Results from './components/Results';
 import DetailView from './components/DetailView';
 import Footer from './components/Footer';
 
+
 function App() {
   return (
     <div className="App">
