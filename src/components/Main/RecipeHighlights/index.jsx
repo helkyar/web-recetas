@@ -17,10 +17,6 @@ export function RecipeHighlights(){
         fetchData();
     }, []);
    
-   
-   
-    
-
     let hightlights = meals.map((element)=> 
         <div>
             <h3>{element.strMeal}</h3>
