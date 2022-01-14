@@ -30,9 +30,7 @@ function Main() {
     );
     colorScale.domain([0, maxVal]);
   return (
-    <div>
-      <h1>Main</h1>
-
+    <div className='main'>
       <Globe
     globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
     backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
@@ -53,7 +51,7 @@ function Main() {
   />
   <RecipeHighlights />
     </div>
-  
+
   );
 }
 
