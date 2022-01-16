@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
+import './component.css'
 
 export function RecipeHighlights(){
     const [meals, setMeals] = useState([]);
@@ -18,14 +19,17 @@ export function RecipeHighlights(){
     }, []);
    
     let hightlights = meals.map((element)=> 
-        <div>
+    <div>
+        <div className="meal">
             <h3>{element.strMeal}</h3>
-            <img src={element.strMealThumb}></img>
+            <img src={element.strMealThumb} height='100px'></img>
          </div>
+    </div>
+        
     )
     
     return (
-        <div>
+        <div className="meal-section">
             {hightlights}
         </div>
        
