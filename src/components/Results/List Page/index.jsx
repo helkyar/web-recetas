@@ -1,39 +1,39 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import { useParams } from 'react-router-dom';
 import React from "react";
 import './component.css'
 
 export function ListPage(){
-    const [categories, setCategory] = useState([]);
-
-
-    let category = [];
-    useEffect(() => {
-        
-        async function fetchData(){
-            const resp = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
-            category = resp.data.categories
-            setCategory(category)
+    const url = "http://www.themealdb.com/api/json/v1/1/";
+    let resp;
+  
+    const [categories, setCategories] = useState([]);
+    let params = useParams();
+  
+    useEffect(()=>{
+      async function fetchCategories(){
+        if (params.type == "Beef"){
+          resp = await axios.get(url+"search.php?s="+params.search);
+        } else if (params.type == "Chicken") {
+          resp = await axios.get(url+"filter.php?i="+params.search)
         }
-        fetchData();
-    }, []);
-   
-    let selectedcategory = categories.map((element)=> 
-    <div>
-        <div>
-            <h3>{element.strCategory}</h3>
-            <img src={element.strCategoryThumb} height='100px'></img>
-            <p>{element.strCategoryDescription}</p>
-         </div>
-    </div>
-        
-    )
-    
+        setCategories([...resp.data.categories])
+        console.log(categories);
+      }
+      fetchCategories();
+    },[])
+  
     return (
-        <div className="category-section">
-            {selectedcategory}
+      <>
+      {categories.map((category)=>
+        <div>
+            <h3>{category.strCategory}</h3>
+            <img src={category.strCategoryThumb} key={category.idCategory} alt={category.strCategory}/>
+            <p>{category.strCategoryDescription}</p>
         </div>
-       
-    )
-
+        )}
+      {/* Bucle que renderiza Categories según la info pescada */}
+      {console.log(categories)}
+      </>);
 }
