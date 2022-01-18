@@ -2,56 +2,87 @@ import './component.css';
 import React from 'react';
 import Globe from 'react-globe.gl';
 import { RecipeHighlights } from './RecipeHighlights';
-import {scaleSequentialSqrt} from 'd3-scale';
-import {interpolateYlOrRd} from 'd3-scale-chromatic';
+import defaultMarkers from "../../Data/markers.js";
+import { useState } from "react";
 
 
+function markerTooltipRenderer(marker) {
+  return `CITY: ${marker.city} (Value: ${marker.value})`;
+}
 
-
+const options = {
+  markerTooltipRenderer
+};
 
 function Main() {
-    const { useState, useEffect, useMemo } = React;
-    const [countries, setCountries] = useState({ features: []});
-    const [hoverD, setHoverD] = useState();
+  const randomMarkers = defaultMarkers.map((marker) => ({
+    ...marker,
+    value: Math.floor(Math.random() * 100)
+  }));
+  const [markers, setMarkers] = useState([]);
+  const [event, setEvent] = useState(null);
+  const [details, setDetails] = useState(null);
+  function onClickMarker(marker, markerObject, event) {
+    setEvent({
+      type: "CLICK",
+      marker,
+      markerObjectID: markerObject.uuid,
+      pointerEventPosition: { x: event.clientX, y: event.clientY }
+    });
+    setDetails(markerTooltipRenderer(marker));
+  }
+  function onDefocus(previousFocus) {
+    setEvent({
+      type: "DEFOCUS",
+      previousFocus
+    });
+    setDetails(null);
+  }
 
-    useEffect(() => {
-      // load data
-      fetch('../datasets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
-    }, []);
 
-    const colorScale = scaleSequentialSqrt(interpolateYlOrRd);
 
-    // GDP per capita (avoiding countries with small pop)
-    const getVal = feat => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
-
-    const maxVal = useMemo(
-      () => Math.max(...countries.features.map(getVal)),
-      [countries]
-    );
-    colorScale.domain([0, maxVal]);
   return (
-    <div className='main'>
-      <Globe
-    globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-    backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
-    lineHoverPrecision={0}
 
-    polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
-    polygonAltitude={d => d === hoverD ? 0.12 : 0.06}
-    polygonCapColor={d => d === hoverD ? 'steelblue' : colorScale(getVal(d))}
-    polygonSideColor={() => 'rgba(0, 100, 0, 0.15)'}
-    polygonStrokeColor={() => '#111'}
-    polygonLabel={({ properties: d }) => `
-      <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
-      GDP: <i>${d.GDP_MD_EST}</i> M$<br/>
-      Population: <i>${d.POP_EST}</i>
-    `}
-    onPolygonHover={setHoverD}
-    polygonsTransitionDuration={300}
+    <div className='main'>
+      <div style={{ padding: 32 }}>
+        <button onClick={() => setMarkers(randomMarkers)}>
+          Randomize markers
+        </button>
+        <button disabled={markers.length === 0} onClick={() => setMarkers([])}>
+          Clear markers
+        </button>
+        <button
+          disabled={markers.length === randomMarkers.length}
+          onClick={() =>
+            setMarkers([...markers, randomMarkers[markers.length]])
+          }
+        >
+          Add marker
+        </button>
+        <button
+          disabled={markers.length === 0}
+          onClick={() => setMarkers(markers.slice(0, markers.length - 1))}
+        >
+          Remove marker
+        </button>
+      </div>
+      
+      <Globe
+      height="100vh"
+      markers={markers}
+      options={options}
+      width="100vw"
+      onClickMarker={onClickMarker}
+      onDefocus={onDefocus}
+
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+      backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+    
+
   />
   <RecipeHighlights />
     </div>
-
+ 
   );
 }
 
