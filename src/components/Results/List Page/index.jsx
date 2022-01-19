@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState} from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import React from "react";
 import './component.css'
 
@@ -8,15 +8,22 @@ export function ListPage(){
     const url = "http://www.themealdb.com/api/json/v1/1/";
     let resp;
   
+    const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     let params = useParams();
+
+    // Lista de posibles relaciones 
+    //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
+  
+  const tags = ['tag','tag','tag','tag']
+
   
     useEffect(()=>{
       async function fetchCategories(){
-        if (params.type == "Beef"){
-          resp = await axios.get(url+"search.php?s="+params.search);
-        } else if (params.type == "Chicken") {
-          resp = await axios.get(url+"filter.php?i="+params.search)
+        if (params.type == "search"){
+          resp = await axios.get(url+"categories.php"+params.search);
+        } else if (params.type == "new") {
+          resp = await axios.get(url+params.search)
         }
         setCategories([...resp.data.categories])
         console.log(categories);
@@ -28,12 +35,18 @@ export function ListPage(){
       <>
       {categories.map((category)=>
         <div>
-            <h3>{category.strCategory}</h3>
-            <img src={category.strCategoryThumb} key={category.idCategory} alt={category.strCategory}/>
-            <p>{category.strCategoryDescription}</p>
+          <section onClick={()=>navigate(`/${category.idCategory}`)}>
+              <h3>{category.strCategory}</h3>
+              <img src={category.strCategoryThumb} key={category.idCategory} alt={category.strCategory}/>
+              <p>{category.strCategoryDescription}</p>
+              <div>
+              {tags.map((tag)=>
+                <Link to={`/${tag}`}> {tag} </Link>
+              )}
+          </div>
+            </section>
         </div>
         )}
-      {/* Bucle que renderiza Categories según la info pescada */}
-      {console.log(categories)}
+
       </>);
 }

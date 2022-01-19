@@ -14,6 +14,7 @@ function Recipe() {
 
   // Lista de posibles relaciones 
   //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
+
   const tags = ['tag','tag','tag','tag',]
 
   useEffect(()=>{

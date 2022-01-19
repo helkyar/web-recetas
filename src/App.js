@@ -11,6 +11,7 @@ import Main from './components/Main'
 import Results from './components/Results';
 import DetailView from './components/DetailView';
 import Footer from './components/Footer';
+import {ListPage} from './components/Results/List Page';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Header/>
         <Switch>
           <Route path="/" element={<Main />}/>
+          <Route path="/category/:id" element={<ListPage/>} />
           <Route path="/recipes/:type/:search" element={<Results />}/>
           <Route path="/recipe/:id" element={<DetailView/>}/>
         </Switch>
