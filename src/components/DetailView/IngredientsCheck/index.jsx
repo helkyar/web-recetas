@@ -7,9 +7,11 @@ import axios from 'axios';
 function IngrdientsCheck() {
   const url = "http://www.themealdb.com/api/json/v1/1/lookup.php?i=";
   let resp;
+  let elements = [];
 
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState([]);
+  const [ingredients, setingredients] = useState([]);
   let params = useParams();
 
   useEffect(()=>{
@@ -17,11 +19,21 @@ function IngrdientsCheck() {
       resp = await axios.get(url+params.id); 
       setRecipe(resp.data.meals[0]);
       console.log(recipe);
+      //Loop harcored to 21 because of api
+      for(let i = 1; i < 21; i++){
+        let ingr = recipe[`strIngredient${i}`];
+        if (ingr == "" || ingr == undefined ) {break;}
+
+        elements.push([ingr, recipe[`strMeasure${i}`]]);
+      }
+      setingredients(elements);
+      console.log(ingredients)
+      console.log(elements)
     }
     fetchRecipe();
   },[])
 
-  //Loop through ingredients and quantities strIngridient1-x strMeasure1-x
+
 
   return (
     <>
@@ -30,7 +42,13 @@ function IngrdientsCheck() {
         <h1>{recipe.strMeal || 'Error con fetch'}</h1>
         <p>pio pio</p>
         <section>
-          Checklist
+          {/* Save recipe changes, +/- buttons to ingredients, change ingredients */}
+          {ingredients.map((ingredient, i)=>
+            <div key={`check${i}`} className='check'>
+              <input id={`check${i}`} type="checkbox"/>
+              <label for={`check${i}`}> {`${ingredient[0]} ${ingredient[1]}`} </label>
+            </div>
+          )}
           {console.log(recipe)}
         </section>
       </div>}

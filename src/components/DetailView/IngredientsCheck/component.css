@@ -1,0 +1,7 @@
+.check{
+    display: flex;
+    width: 45%;
+}
+input:checked + label{
+    text-decoration: line-through;
+  }
