@@ -1,8 +1,12 @@
 import './component.css';
 
+import IngrdientsCheck from './IngredientsCheck';
+
 function DetailView() {
   return (
-    <h1>DetailView</h1>
+    <>
+      <IngrdientsCheck />
+    </>
   );
 }
 
