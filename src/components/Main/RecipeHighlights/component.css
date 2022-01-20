@@ -1,8 +1,0 @@
-.meal-section{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr
-}
-.meal{
-    padding: 5%;
-    border: 1px solid black;
-}
