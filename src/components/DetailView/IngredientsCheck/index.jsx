@@ -22,19 +22,30 @@ function IngrdientsCheck() {
       resp = await axios.get(`${url}${params.id}`); 
       setRecipe(resp.data.meals[0]);
       console.log(recipe);
-      //Loop harcored to 21 because of api
-      const response = resp.data.meals[0];
-      for(let i = 1; i < totalingredients; i++){
-        
-        let ingr = response[`strIngredient${i}`];
-        if (ingr == "" || ingr == undefined ) {break;}
-        // Grap the measures and separate its numbers 
-        elements.push([ingr, response[`strMeasure${i}`]]);
-      }
-      setingredients(elements);
     }
     fetchRecipe();
   },[])
+
+  useEffect(()=>{
+    for(let i = 1; i < totalingredients; i++){
+        
+      let ingr = recipe[`strIngredient${i}`];
+      if (ingr == "" || ingr == undefined ) {break;}
+
+      //Separate numbers from letters and multiply by {people}
+      let measures = recipe[`strMeasure${i}`];
+
+      let quantities = measures.split('/');
+      let newMeasures = quantities.map((quantitie)=>{
+        let numb = quantitie.match(/[0-9.,]+/g); 
+        return quantitie.replace(/[0-9.,]+/g, parseFloat(numb)*people)
+      })
+
+      //Put it all together
+      elements.push([ingr, newMeasures.join('/')]);
+    }
+    setingredients(elements);
+  },[recipe, people])
 
   return (
     <>
@@ -51,7 +62,7 @@ function IngrdientsCheck() {
             <div key={`check${i}`} className='check'>
               <input id={`check${i}`} type="checkbox"/>
               <label htmlFor={`check${i}`}> 
-                {`${ingredient[0]} (${ingredient[1]} ${people > 1 ? 'x'+people:''})`} 
+                {`${ingredient[0]} (${ingredient[1]})`} 
               </label>
             </div>
           )}
