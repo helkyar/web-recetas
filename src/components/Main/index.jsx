@@ -1,6 +1,7 @@
 import './component.css';
 import React from 'react';
 import Globe from 'react-globe.gl';
+import {DropMenu} from './DropMenu';
 import { RecipeHighlights } from './RecipeHighlights';
 import defaultMarkers from "../../Data/markers.js";
 import { useState } from "react";
@@ -80,6 +81,7 @@ function Main() {
     
 
   />
+  <DropMenu/>
   <RecipeHighlights />
     </div>
  
