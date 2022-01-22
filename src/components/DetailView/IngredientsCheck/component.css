@@ -12,7 +12,8 @@ label {
     text-transform: capitalize;
 }
 input {
-    width: fit-content;
+    width: 5rem;
+    text-align: center;
 }
 input:checked + label{
     text-decoration: line-through;
