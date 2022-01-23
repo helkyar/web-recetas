@@ -1,8 +1,38 @@
-.meal-section{
+.highlights{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr
+    grid-template-columns: 1fr 1fr
+
+    
 }
-.meal{
+
+.meal-high-section{
+    display: flex;
     padding: 5%;
-    border: 1px solid black;
+    margin: 3%;
+    border: 2px solid grey;
+    border-radius: 13px;
+    background: aquamarine;
+    transition:all;
+    transition-duration: 1s;
 }
+.meal-high-section:hover{
+    transform: translate(10px, 10px);
+}
+.meal-opt{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+span:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 783px) {
+    .highlights {
+      grid-template-columns:1fr;
+    }
+    .meal-section{
+        display: flex;
+        flex-direction: column;
+    }
+  }

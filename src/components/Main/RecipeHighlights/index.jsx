@@ -1,17 +1,19 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import { useNavigate} from 'react-router-dom';
 import React from "react";
 import './component.css'
 
 export function RecipeHighlights(){
     const [meals, setMeals] = useState([]);
+    const navigate = useNavigate();
 
 
     let meal = [];
     useEffect(() => {
         
         async function fetchData(){
-            const resp = await axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
+            const resp = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=a')
             meal = resp.data.meals
             setMeals(meal)
         }
@@ -19,18 +21,31 @@ export function RecipeHighlights(){
     }, []);
    
     let hightlights = meals.map((element)=> 
-    <div>
-        <div className="meal">
-            <h3>{element.strMeal}</h3>
-            <img src={element.strMealThumb} height='100px'></img>
-         </div>
+    <div  className="meal-high-section" >
+        <div>
+            <video width="320" height="240" controls poster={element.strMealThumb}>
+            <source src={element.strYoutube} type="video/mp4"></source>
+            </video>
+        </div>
+        <div className="meal-instruction">
+            <h3 onClick={()=>navigate(`/recipe/${element.idMeal}`)}>{element.strMeal}</h3>
+            <p>{element.strInstructions}</p>
+            <div className="meal-opt">
+            <b>Category:</b><span onClick={()=>navigate(`categories/${element.strCategory}`)}> {element.strCategory}</span>
+            <b>Area:</b><span> {element.strArea}</span>
+
+            </div>
+        </div>
+       
     </div>
         
     )
     
     return (
-        <div className="meal-section">
-            {hightlights}
+        <div>
+            <h2>Last recipes</h2>
+            <div  className="highlights">{hightlights}
+            </div> 
         </div>
        
     )
