@@ -9,44 +9,93 @@ export function ListPage(){
     let resp;
   
     const navigate = useNavigate();
-    const [categories, setCategories] = useState([]);
-    let params = useParams();
+    const [mealsCategory, setMealCategory] = useState([]);
+    const [mainCategory, setCategory] = useState([]);
+   /*  const [mealOptions, setMealOptions] = useState([]); */
 
-    // Lista de posibles relaciones 
-    //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
   
-  const tags = ['tag','tag','tag','tag']
+    let {category} = useParams();
+
+   
+    /*--UseEffect para título de categoría --*/
+
+
+    useEffect(()=>{
+      async function fetchCategory(){
+        resp = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
+     
+      setCategory([...resp.data.categories])
+    }
+    fetchCategory();
+    },[])
+
+     /*--UseEffect para meals de categoria --*/
 
   
     useEffect(()=>{
-      async function fetchCategories(){
-        if (params.type == "search"){
-          resp = await axios.get(url+"categories.php"+params.search);
-        } else if (params.type == "new") {
-          resp = await axios.get(url+params.search)
-        }
-        setCategories([...resp.data.categories])
-        console.log(categories);
+      async function fetchMealCategory(){
+          resp = await axios.get(`${url}filter.php?c=${category}`);
+        setMealCategory([...resp.data.meals])
       }
-      fetchCategories();
+      fetchMealCategory();
     },[])
+
+    {
+                                    
+      /*--UseEffect para opciones de cada meal --*/
+
+ /*      useEffect(()=>{
+        async function fetchMealOptions(){
+            resp = await axios.get(`${url}filter.php?c=${meal.idMeal}`);
+            setMealOptions([...resp.data.meals])
+        }
+        fetchMealOptions();
+      },[])
+} */
+
+
+
+     // Lista de posibles relaciones 
+    // (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
   
+      
+  const tags = ['tag','tag','tag','tag']
+
+
+    const cateTitle = mainCategory.filter(title => title.strCategory == category)
+
+
     return (
-      <>
-      {categories.map((category)=>
-        <div>
-          <section onClick={()=>navigate(`/${category.idCategory}`)}>
-              <h3>{category.strCategory}</h3>
-              <img src={category.strCategoryThumb} key={category.idCategory} alt={category.strCategory}/>
-              <p>{category.strCategoryDescription}</p>
-              <div>
+    <>
+    <div>
+      {cateTitle.map((element)=>
+        <div className="category-title">
+          <div className="cat-image-section">
+            <img src={element.strCategoryThumb} height="200px"></img>
+          </div>
+          <div className="cat-description">
+            <h1>{element.strCategory}</h1>
+            <p>{element.strCategoryDescription}</p>
+          </div>
+        </div>
+      )}
+    </div> 
+    <div className="meal-section">
+    {mealsCategory.map((meal)=>
+        <div className="meal-item" onClick={()=>navigate(`/recipe/${meal.idMeal}`)}>
+            <div>
+               <img src={meal.strMealThumb} key={meal.strMealThumb} alt={meal.strMeal} className="meal-img"/>
+            </div>
+            <div className="meal-cat-description">
+              <h3>{meal.strMeal}</h3>
               {tags.map((tag)=>
                 <Link to={`/${tag}`}> {tag} </Link>
               )}
-          </div>
-            </section>
-        </div>
-        )}
+            </div>
 
+        </div>        
+        )}
+    </div>
       </>);
+  }
 }
