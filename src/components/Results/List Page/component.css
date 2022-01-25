@@ -1,0 +1,48 @@
+    .category-title{
+        display: flex;
+        flex-direction: row;
+        background-color: azure;
+    }
+    .cat-image-section{
+        display: flex;
+        width: 49%;
+        align-items: center;
+        justify-content: center;
+    }
+    .cat-description{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 60%;
+        padding: 5%;
+    }
+    .meal-section{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+       
+ 
+    }
+    .meal-item{
+        display: flex;
+        padding: 5%;
+        margin: 3%;
+        border: 2px solid grey;
+        border-radius: 13px;
+        background: aquamarine;
+        transition:all;
+        transition-duration: 1s;
+        cursor: pointer;
+    }
+    .meal-item:hover{
+        transform: translate(10px, 10px);
+    }
+
+    .meal-img{
+        height: 130px;
+        object-fit: cover;
+    }
+    .meal-cat-description{
+        padding-left: 3%;
+        text-align: left;
+
+    }
