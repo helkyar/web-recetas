@@ -23,6 +23,7 @@ body {
   .dropMenuCategories{
     display: grid;
     grid-template-columns: repeat(5,1fr);
+    padding-top: 10px;
   }
   .categoryHeader {
     display: flex;
@@ -37,6 +38,8 @@ body {
   }
   .dropMenu{
       text-align: left;
+      border: 1px solid black;
+      border-radius: 10px;
   }
 .category > ul {
       display: none;
