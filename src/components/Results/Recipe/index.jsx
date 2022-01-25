@@ -20,19 +20,26 @@ function Recipe() {
   useEffect(()=>{
     async function fetchRecipes(){
       if (params.type == "search"){
-        resp = await axios.get(url+"search.php?f="+params.search);
+        resp = await axios.get(url+"search.php?s="+params.search);
       } else if (params.type == "new") {
         resp = await axios.get(url+"filter.php?i="+params.search)
       }
-      setRecipes([...resp.data.meals])
-      console.log(recipes);
+      else if(params.type == "area") {
+        resp = await axios.get(url+"filter.php?a="+params.search)
+      }
+      if(resp.data.meals != undefined){
+        setRecipes(resp.data.meals)
+      } 
+      
+      
     }
     fetchRecipes();
   },[])
 
-  return (
-    <>
-    {recipes.map((recipe)=>
+  if(recipes.length != 0){
+    return (
+    <> 
+      {recipes.map((recipe)=>
       <div className='recipes-result'>
         <img src={recipe.strMealThumb} key={recipe.idMeal} alt={recipe.strMealThumb}/>
         <section onClick={()=>navigate(`/recipe/${recipe.idMeal}`)}>
@@ -52,6 +59,10 @@ function Recipe() {
     
     {console.log(recipes)}
     </>);
+  } else {
+    return <h4>Not results found</h4>
+  }
+  
 }
 
 export default Recipe;

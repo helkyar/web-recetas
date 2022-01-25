@@ -32,7 +32,7 @@ export function RecipeHighlights(){
             <p>{element.strInstructions}</p>
             <div className="meal-opt">
             <b>Category:</b><span onClick={()=>navigate(`categories/${element.strCategory}`)}> {element.strCategory}</span>
-            <b>Area:</b><span> {element.strArea}</span>
+            <b>Area:</b><span onClick={()=> navigate(`/recipes/area/${element.strArea}`)}> {element.strArea}</span>
 
             </div>
         </div>
