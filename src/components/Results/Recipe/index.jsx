@@ -9,10 +9,13 @@ function Recipe() {
   let resp;
 
   const navigate = useNavigate();
-  const [tags, setTags] = useState([])
   const [recipes, setRecipes] = useState([]);
   let params = useParams();
 
+  // Lista de posibles relaciones 
+  //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
+
+  const tags = ['tag','tag','tag','tag',]
 
   useEffect(()=>{
     async function fetchRecipes(){
@@ -21,29 +24,33 @@ function Recipe() {
       } else if (params.type == "new") {
         resp = await axios.get(url+"filter.php?i="+params.search)
       }
-
-      setRecipes([...resp.data.meals])
-
+      else if(params.type == "area") {
+        resp = await axios.get(url+"filter.php?a="+params.search)
+      }
+      if(resp.data.meals != undefined){
+        setRecipes(resp.data.meals)
+      } 
+      
+      
     }
     fetchRecipes();
   },[])
 
-
-  return (
-    <>
-    {recipes.map((recipe)=>
-      <div key={recipe.idMeal} className='recipes-result'>
-        <img src={recipe.strMealThumb} alt={recipe.strMealThumb}/>
+  if(recipes.length != 0){
+    return (
+    <> 
+      {recipes.map((recipe)=>
+      <div className='recipes-result'>
+        <img src={recipe.strMealThumb} key={recipe.idMeal} alt={recipe.strMealThumb}/>
         <section onClick={()=>navigate(`/recipe/${recipe.idMeal}`)}>
           <h1>{recipe.strMeal}</h1>
           <p> x minutos | x €/pers | x calorías </p>
           <p className='description'>{recipe.strInstructions}</p>
           <div className='points'>...</div>
           <div>
-            {recipe.strTags && 
-              recipe.strTags.split(',').map((tag, id)=>
-              <Link key={`tag${id}`} to={`/recipes/tag/${tag}`}> {tag} </Link>)
-            }
+            {tags.map((tag)=>
+              <Link to={`/recipes/ingridient/${tag}`}> {tag} </Link>
+            )}
             
           </div>
         </section>
