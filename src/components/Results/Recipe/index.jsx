@@ -9,12 +9,9 @@ function Recipe() {
   let resp;
 
   const navigate = useNavigate();
+  const [tags, setTags] = useState([])
   const [recipes, setRecipes] = useState([]);
   let params = useParams();
-
-  // Lista de posibles relaciones 
-  //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
-  const tags = ['tag','tag','tag','tag',]
 
   useEffect(()=>{
     async function fetchRecipes(){
@@ -24,7 +21,6 @@ function Recipe() {
         resp = await axios.get(url+"filter.php?i="+params.search)
       }
       setRecipes([...resp.data.meals])
-      console.log(recipes);
     }
     fetchRecipes();
   },[])
@@ -32,17 +28,18 @@ function Recipe() {
   return (
     <>
     {recipes.map((recipe)=>
-      <div className='recipes-result'>
-        <img src={recipe.strMealThumb} key={recipe.idMeal} alt={recipe.strMealThumb}/>
+      <div key={recipe.idMeal} className='recipes-result'>
+        <img src={recipe.strMealThumb} alt={recipe.strMealThumb}/>
         <section onClick={()=>navigate(`/recipe/${recipe.idMeal}`)}>
           <h1>{recipe.strMeal}</h1>
           <p> x minutos | x €/pers | x calorías </p>
           <p className='description'>{recipe.strInstructions}</p>
           <div className='points'>...</div>
           <div>
-            {tags.map((tag)=>
-              <Link to={`/recipes/ingridient/${tag}`}> {tag} </Link>
-            )}
+            {recipe.strTags && 
+              recipe.strTags.split(',').map((tag, id)=>
+              <Link key={`tag${id}`} to={`/recipes/tag/${tag}`}> {tag} </Link>)
+            }
             
           </div>
         </section>

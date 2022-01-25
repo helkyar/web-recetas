@@ -10,6 +10,8 @@ function Title({recipe}) {
       {recipe!=[] &&
       <div className='recipe-title'>
         <h1>{recipe.strMeal || '404 Recipe not Found'}</h1>
+        <img src={recipe.strMealThumb} alt={`foto de ${recipe.strMeal}`} />
+        {recipe.strTags ? recipe.strTags.split(',') : ''}
       </div>}
     </>);
 }
