@@ -1,4 +1,7 @@
 .people input {
-    width: 5rem;
+    width: 3rem;
     text-align: center;
+}
+.people button{
+    margin: 0 0.2rem;
 }

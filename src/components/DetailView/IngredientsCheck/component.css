@@ -1,5 +1,6 @@
 .ingredients{
-    border: 3px, black solid;
+    background-color: chartreuse;
+    border-top: 3px, black solid;
 }
 .recipe button {
     margin: 0 0.5rem;
@@ -10,10 +11,6 @@
 }
 label {
     text-transform: capitalize;
-}
-input {
-    width: 5rem;
-    text-align: center;
 }
 input:checked + label{
     text-decoration: line-through;
