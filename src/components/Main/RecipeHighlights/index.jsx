@@ -23,7 +23,7 @@ export function RecipeHighlights(){
     let hightlights = meals.map((element)=> 
     <div  className="meal-high-section" >
         <div>
-            <video width="320" height="240" controls poster={element.strMealThumb}>
+            <video width="320" height="240" poster={element.strMealThumb}>
             <source src={element.strYoutube} type="video/mp4"></source>
             </video>
         </div>
