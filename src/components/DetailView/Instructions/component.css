@@ -2,3 +2,6 @@ iframe{
     width: 40rem;
     height: 20em;
 }
+p:first-letter{
+    text-transform: capitalize
+}
