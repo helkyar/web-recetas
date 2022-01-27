@@ -3,17 +3,22 @@
     align-items: center;
     background-color: black;
     padding: 1rem;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
+    height: 5rem;
 }
 .header button{
     margin-left: 1rem;
 }
+.header button+button{
+    margin-right: auto;
+}
 .logo{
+    position: absolute;
+    top: 2rem;
     width: calc(3.5em + 12vw);
-    justify-self: center;
     border-radius: 10px;
     /* Needs to be improved (justify-self doesn't work) */
-    margin: 0 auto -4rem 22rem;
+    margin-left: calc(100vw/2 - (3.5em + 12vw)/2 - 1rem);
 }
 .media + .media {
     margin-left: 1rem;

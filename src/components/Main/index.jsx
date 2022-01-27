@@ -45,7 +45,7 @@ function Main() {
   return (
 
     <div className='main'>
-      <div style={{ padding: 32 }}>
+      <div className='markers'>
         <button onClick={() => setMarkers(randomMarkers)}>
           Randomize markers
         </button>
