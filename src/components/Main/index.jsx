@@ -20,7 +20,7 @@ function Main() {
           setCountries(countries);
 
           setTimeout(() => {
-            setTransitionDuration(4000);
+            setTransitionDuration(2000);
             setAltitude(() => feat => Math.max(0.1, Math.sqrt(+feat.properties.POP_EST) * 7e-5));
           }, 3000);
         });
@@ -34,8 +34,9 @@ function Main() {
     }, []);
 
     return (
-      <div>
-          <Globe
+      <div className='main'>
+        <div >
+        <Globe
             ref={globeEl}
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
 
@@ -49,6 +50,8 @@ function Main() {
             `}
             polygonsTransitionDuration={transitionDuration} />
 
+        </div>
+        
           <DropMenu/>
           <RecipeHighlights />
     </div>

@@ -14,7 +14,7 @@ function Header() {
       <SearchBar/>
       <button onClick={()=>navigate("recipes/new/chicken_breast")}>New</button>
       <button onClick={()=>navigate("recipes/popu/"+new Date().getMonth())}>Popu</button>
-      <img className="logo" src={logo}/>
+      <img className="logo" onClick={()=>navigate('/')} src={logo}/>
       <img className="media" src={facebook} />
       <img className="media" src={insta} />
       <img className="media" src={twitter} />
