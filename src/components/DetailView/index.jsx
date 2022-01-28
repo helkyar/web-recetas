@@ -5,6 +5,7 @@ import { useParams,useNavigate, Link } from 'react-router-dom';
 
 import Title from './Title'
 import IngrdientsCheck from './IngredientsCheck';
+import Instructions from './Instructions';
 
 function DetailView() {
 
@@ -20,12 +21,13 @@ function DetailView() {
       setRecipe(resp.data.meals[0]);
     }
     fetchRecipe();
-  },[])
+  },[]);
 
   return (
     <>
       <Title recipe={recipe}/>
       <IngrdientsCheck recipe={recipe} />
+      <Instructions recipe={recipe} />
     </>
   );
 }
