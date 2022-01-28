@@ -19,6 +19,11 @@
     border-radius: 10px;
     /* Needs to be improved (justify-self doesn't work) */
     margin-left: calc(100vw/2 - (3.5em + 12vw)/2 - 1rem);
+    z-index: 1;
+    transition: all .2s ease-in-out;
+}
+.logo:hover{
+    transform: scale(1.1);
 }
 .media + .media {
     margin-left: 1rem;
