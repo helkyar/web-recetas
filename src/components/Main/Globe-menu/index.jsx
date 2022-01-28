@@ -6,7 +6,7 @@ import {
     Geography,
     Sphere,
     Marker,
-    ZoomableGroup
+   
   } from "react-simple-maps";
 import { useNavigate } from 'react-router-dom';
   

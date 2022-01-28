@@ -14,7 +14,7 @@ export default function Main() {
   return (
 
     <div className='main'>
-      <MapMenu/>
+    <MapMenu/>
      
   <RecipeHighlights />
     </div>
