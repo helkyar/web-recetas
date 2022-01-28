@@ -6,7 +6,6 @@ import Recipe from './Recipe'
 function Results() {
   return (
     <>
-    <h1>Results</h1>
     <Recipe/>
     <ListPage/>
     </>);

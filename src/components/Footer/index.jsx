@@ -1,8 +1,10 @@
 import './component.css';
 
-function Footer() {
+function Footer() { 
   return (
-    <h1>Footer</h1>
+    <footer>
+     <p>{`Recetas picos pardos. Todos los derechos reservados ${new Date().getFullYear()} `}&copy;</p>
+    </footer>
   );
 }
 
