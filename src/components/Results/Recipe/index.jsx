@@ -12,11 +12,6 @@ function Recipe() {
   const [recipes, setRecipes] = useState([]);
   let params = useParams();
 
-  // Lista de posibles relaciones 
-  //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
-
-  const tags = ['tag','tag','tag','tag',]
-
   useEffect(()=>{
     async function fetchRecipes(){
       if (params.type == "search"){
@@ -48,16 +43,13 @@ function Recipe() {
           <p className='description'>{recipe.strInstructions}</p>
           <div className='points'>...</div>
           <div>
-            {tags.map((tag)=>
-              <Link to={`/recipes/ingridient/${tag}`}> {tag} </Link>
-            )}
-            
+            {recipe.strTags &&
+              recipe.strTags.split(',').map((tag, id)=>
+              <Link key={`tag${id}`} to={`/recipes/tag/${tag}`}> {tag} </Link>)}            
           </div>
         </section>
       </div>
     )}
-    
-    {console.log(recipes)}
     </>);
   } else {
     return <h4>Not results found</h4>

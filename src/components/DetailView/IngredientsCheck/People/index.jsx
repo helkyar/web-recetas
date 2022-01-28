@@ -1,6 +1,4 @@
 import './component.css';
-import { useState } from 'react';
-
 function People({setpeople}) {
   const {people, setPeople} = setpeople;
   

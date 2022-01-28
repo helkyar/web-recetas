@@ -1,5 +1,8 @@
 .ingredients{
-    border-top: 3px, black solid;
+    border: 3px black solid;
+    margin: 1rem 3rem;
+    padding: 1rem 2rem 2rem;
+    border-radius: 10px;
 }
 .recipe button {
     margin: 0 0.5rem;

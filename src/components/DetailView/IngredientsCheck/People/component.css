@@ -1,3 +1,8 @@
+.people p{
+    border-bottom: 1px black solid;
+    cursor: auto;
+    padding-bottom: 0.5rem;
+}
 .people input {
     width: 3rem;
     text-align: center;
