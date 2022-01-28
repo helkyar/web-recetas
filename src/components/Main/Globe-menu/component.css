@@ -1,0 +1,14 @@
+circle{
+    cursor: pointer;
+}
+text {
+    visibility: hidden;
+    cursor: pointer;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.rsm-marker:hover > text {
+    visibility:visible ;
+}
+.rsm-marker:hover > circle {
+    visibility: hidden;
+}
