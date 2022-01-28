@@ -1,14 +1,14 @@
 .recipes-result{
     margin: 1rem 2rem;
     display: flex;
-    justify-content: start;
+    justify-content: center;
 }
 .recipes-result img {
     width: 17rem;
     margin: 2rem 0;
 }
 .recipes-result section {
-    width: calc(34rem);
+    width: 50rem;
     margin-left: 2rem;
     display: flex;
     flex-direction: column;
