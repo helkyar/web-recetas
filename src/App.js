@@ -20,7 +20,7 @@ function App() {
       <Header/>
         <Switch>
           <Route path="/" element={<Main />}/>
-          <Route path="/categories/:category" element={<ListPage/>} />
+          <Route path="/categories/:category" element={<ListPage/>}  />
           <Route path="/recipes/:type/:search" element={<Results />}/>
           <Route path="/recipe/:id" element={<DetailView/>}/>
         </Switch>
