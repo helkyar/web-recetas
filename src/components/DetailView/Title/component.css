@@ -1,0 +1,17 @@
+.recipe-title {
+    padding: 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.recipe-title img{
+    margin: 1rem auto;
+    height: 20rem;
+}
+.recipe-title a{
+    text-decoration: none;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    background-color: lightgrey;
+    margin-right: 1rem;
+}

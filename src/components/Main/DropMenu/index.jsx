@@ -20,11 +20,8 @@ export function DropMenu () {
 
   
   
-  
-  return (<>
-  { <div className='dropMenu'><div className='dropMenuCategories'>{food.map((element,index) => { return  (<div className='category' key={index}><div className='categoryHeader'><img src={element.img} width='45px' height='45px'></img><h3 onClick={()=> navigate(`/recipes/search/${element.nav}`)}>{element.title}</h3></div><ul>{element.content.map((c) =>(<><li><p onClick={()=> navigate(`/recipes/search/${c.nav}`)}>{c.name}</p></li> </>))}</ul></div>)})}</div></div> }
-  
-  </>
-  )
+  return <div className='dropMenu'><div className='dropMenuCategories'>{food.map((element,index) => { return  (<div className='category' key={index}><div className='categoryHeader'><img src={element.img} width='45px' height='45px'></img><h3 onClick={()=> navigate(`/recipes/search/${element.nav}`)}>{element.title}</h3></div><ul>{element.content.map((c) =>(<><li><p onClick={()=> navigate(`/recipes/search/${c.nav}`)}>{c.name}</p></li> </>))}</ul></div>)})}</div></div> 
+
+
   
 }

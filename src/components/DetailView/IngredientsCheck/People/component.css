@@ -1,0 +1,12 @@
+.people p{
+    border-bottom: 1px black solid;
+    cursor: auto;
+    padding-bottom: 0.5rem;
+}
+.people input {
+    width: 3rem;
+    text-align: center;
+}
+.people button{
+    margin: 0 0.2rem;
+}

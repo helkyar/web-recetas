@@ -1,26 +1,29 @@
 import './component.css';
 import React from 'react';
-import Globe from 'react-globe.gl';
+
+import { DropMenu } from './DropMenu';
 import { RecipeHighlights } from './RecipeHighlights';
-import defaultMarkers from "../../Data/markers.js";
-import { useState } from "react";
+
+
 import MapMenu from './Globe-menu';
 
 
 
-export default function Main() {
-  
+function Main() {
+ 
 
-  return (
+    return (
+      <div className='main'>
+        <MapMenu/>
+        
+          <DropMenu/>
+          <RecipeHighlights />
 
-    <div className='main'>
-      <MapMenu/>
-     
-  <RecipeHighlights />
     </div>
  
   )
 }
   
 
+export default Main
 
