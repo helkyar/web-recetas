@@ -16,12 +16,6 @@ function Recipe() {
   
   
   let params = useParams();
-  
-
-  // Lista de posibles relaciones 
-  //  (necesitan ser pescadas con axios o procesadas a partir de la respuesta)
-
-  const tags = ['tag','tag','tag','tag',]
 
   async function fetchRecipes(){
     if (params.type == "search"){
@@ -31,27 +25,20 @@ function Recipe() {
       resp = await axios.get(url+"filter.php?i="+params.search)
     }
     else if(params.type == "area") {
-      resp = await axios.get(url+"filter.php?a="+params.search)
-      
-      
-      
+      resp = await axios.get(url+"filter.php?a="+params.search)           
     }
     if(resp.data.meals != undefined){
       setRecipes(resp.data.meals)
     } 
-    
-    
   }
-  useEffect(()=>{
-    
+  
+  useEffect(()=>{    
     fetchRecipes();
   },[params])
 
   if(recipes.length != 0){
     return (
     <> 
-    
- 
       {recipes.map((recipe)=>
       <div className='recipes-result'>
         <img src={recipe.strMealThumb} key={recipe.idMeal} alt={recipe.strMealThumb}/>
@@ -61,10 +48,9 @@ function Recipe() {
          {isParamsArea ? <><p className='description'>{recipe.strInstructions}</p>
           <div className='points'>...</div></> : null }
           <div>
-            {tags.map((tag)=>
-              <Link to={`/recipes/ingridient/${tag}`}> {tag} </Link>
-            )}
-            
+            {recipe.strTags &&
+              recipe.strTags.split(',').map((tag, id)=>
+              <Link key={`recipe-tag${id}`} to={`/recipes/tag/${tag}`}> {tag} </Link>)}            
           </div>
         </section>
       </div>
