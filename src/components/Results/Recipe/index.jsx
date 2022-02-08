@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 function Recipe() {
-  const url = "http://www.themealdb.com/api/json/v1/1/";
+  const url = "http://localhost:3003/v1/1/";
   let resp;
 
   const navigate = useNavigate();
@@ -19,16 +19,19 @@ function Recipe() {
 
   async function fetchRecipes(){
     if (params.type == "search"){
-      resp = await axios.get(url+"search.php?s="+params.search);
+      resp = await axios.get(`${url}meals?f=${params.search}`);
+      console.log(`${url}meals?f=${params.search}`);
+      console.log(resp);
+
       setIsParamsArea(true)
     } else if (params.type == "new") {
-      resp = await axios.get(url+"filter.php?i="+params.search)
+      resp = await axios.get(`${url}meals?c=${params.search}`)
     }
     else if(params.type == "area") {
-      resp = await axios.get(url+"filter.php?a="+params.search)           
+      resp = await axios.get(`${url}meals?a=${params.search}`)           
     }
-    if(resp.data.meals != undefined){
-      setRecipes(resp.data.meals)
+    if(resp.data != undefined){
+      setRecipes(resp.data)
     } 
   }
   
@@ -48,9 +51,9 @@ function Recipe() {
          {isParamsArea ? <><p className='description'>{recipe.strInstructions}</p>
           <div className='points'>...</div></> : null }
           <div>
-            {recipe.strTags &&
-              recipe.strTags.split(',').map((tag, id)=>
-              <Link key={`recipe-tag${id}`} to={`/recipes/tag/${tag}`}> {tag} </Link>)}            
+          {recipe.strTags &&
+          recipe.strTags.split(',').map((tag, id)=>
+          <Link key={`title-tag${id}`} to={`/recipes/tag/${tag}`}> {tag} </Link>)}           
           </div>
         </section>
       </div>

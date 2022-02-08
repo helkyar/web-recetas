@@ -9,7 +9,7 @@ import Instructions from './Instructions';
 
 function DetailView() {
 
-  const url = "http://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+  const url = "http://localhost:3003/v1/1/meals/";
   let resp;
 
   let params = useParams();
@@ -18,7 +18,8 @@ function DetailView() {
   useEffect(()=>{
     async function fetchRecipe(){
       resp = await axios.get(`${url}${params.id}`); 
-      setRecipe(resp.data.meals[0]);
+      console.log(resp.data);
+      setRecipe(resp.data[0]);
     }
     fetchRecipe();
   },[]);
